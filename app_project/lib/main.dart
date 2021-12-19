@@ -61,10 +61,35 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 225,
               width: 400,
               decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 234, 61, 78),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(50),
-                    bottomRight: Radius.circular(50)),
+                  color: Color.fromARGB(255, 234, 61, 78),
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(30),
+                      bottomRight: Radius.circular(30)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey,
+                        spreadRadius: 1,
+                        blurRadius: 7,
+                        offset: const Offset(0, 3)),
+                  ]),
+              child: Column(
+                children: const <Widget>[
+                  Padding(padding: EdgeInsets.only(top: 40)),
+                  Icon(
+                    Icons.settings,
+                    color: Colors.black,
+                    size: 50,
+                  ),
+                  Padding(padding: EdgeInsets.only(top: 20)),
+                  Text(
+                    'LTG',
+                    style: TextStyle(fontSize: 60, fontWeight: FontWeight.w400),
+                  ),
+                  Text(
+                    'LOOK FOR THE GAME',
+                    style: TextStyle(fontSize: 20),
+                  )
+                ],
               ),
             ),
           ),
@@ -91,6 +116,15 @@ class _MyHomePageState extends State<MyHomePage> {
           Center(
             child: Container(
               margin: const EdgeInsets.only(top: 40),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Colors.grey,
+                        spreadRadius: 2,
+                        blurRadius: 7,
+                        offset: Offset(0, 6)),
+                  ]),
               child: ElevatedButton(
                   onPressed: OnPressedButon,
                   child: const Text(
@@ -119,6 +153,15 @@ class _MyHomePageState extends State<MyHomePage> {
           Center(
             child: Container(
               margin: const EdgeInsets.only(top: 25),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Colors.grey,
+                        spreadRadius: 2,
+                        blurRadius: 7,
+                        offset: Offset(0, 6)),
+                  ]),
               child: ElevatedButton(
                   onPressed: OnPressedButon,
                   child: const Text(
@@ -147,6 +190,15 @@ class _MyHomePageState extends State<MyHomePage> {
           Center(
             child: Container(
               margin: const EdgeInsets.only(top: 25),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Colors.grey,
+                        spreadRadius: 2,
+                        blurRadius: 7,
+                        offset: Offset(0, 6)),
+                  ]),
               child: ElevatedButton(
                   onPressed: OnPressedButon,
                   child: const Text(

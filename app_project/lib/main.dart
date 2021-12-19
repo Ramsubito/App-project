@@ -1,3 +1,6 @@
+// ignore_for_file: unnecessary_const
+
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,12 +14,24 @@ class LTG_App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App: Roger Perez and Marc Ramos',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
-      home: const MyHomePage(title: 'LTG: Look for the game'),
-    );
+        title: 'Flutter App: Roger Perez and Marc Ramos',
+        theme: ThemeData(
+          primarySwatch: Colors.red,
+        ),
+        home: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromARGB(255, 255, 255, 255),
+                Color.fromARGB(255, 255, 255, 255),
+                Color.fromARGB(255, 150, 150, 150),
+              ],
+            ),
+          ),
+          child: const MyHomePage(title: 'LTG: Look for the game'),
+        ));
   }
 }
 
@@ -35,19 +50,126 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      backgroundColor: Colors.transparent,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'a darle duro',
+          child: Column(
+        //mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Container(
+              height: 225,
+              width: 400,
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 234, 61, 78),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(50),
+                    bottomRight: Radius.circular(50)),
+              ),
             ),
-          ],
-        ),
-      ),
+          ),
+          Center(
+            child: Container(
+              width: 125,
+              height: 125,
+              margin: const EdgeInsets.only(top: 40),
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                //color: Colors.blue,
+                image: DecorationImage(
+                    image: AssetImage('Assets/Asset_LogoLTG.png'),
+                    fit: BoxFit.cover),
+              ),
+            ),
+          ),
+          Center(
+            child: Container(
+              margin: const EdgeInsets.only(top: 40),
+              child: ElevatedButton(
+                  onPressed: OnPressedButon,
+                  child: const Text(
+                    'Look for prices',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontSize: 20,
+                      fontFamily: 'Swiss',
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 234, 61, 78)),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 234, 61, 78)),
+                    fixedSize:
+                        MaterialStateProperty.all<Size>(const Size(250, 50)),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                  )),
+            ),
+          ),
+          Center(
+            child: Container(
+              margin: const EdgeInsets.only(top: 25),
+              child: ElevatedButton(
+                  onPressed: OnPressedButon,
+                  child: const Text(
+                    'News',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontSize: 20,
+                      fontFamily: 'Swiss',
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 234, 61, 78)),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 234, 61, 78)),
+                    fixedSize:
+                        MaterialStateProperty.all<Size>(const Size(250, 50)),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                  )),
+            ),
+          ),
+          Center(
+            child: Container(
+              margin: const EdgeInsets.only(top: 25),
+              child: ElevatedButton(
+                  onPressed: OnPressedButon,
+                  child: const Text(
+                    'Your Wishlist',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      fontSize: 20,
+                      fontFamily: 'Swiss',
+                    ),
+                  ),
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 234, 61, 78)),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 234, 61, 78)),
+                    fixedSize:
+                        MaterialStateProperty.all<Size>(const Size(250, 50)),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                  )),
+            ),
+          )
+        ],
+      )),
     );
   }
 }
+
+// ignore: non_constant_identifier_names
+void OnPressedButon() {}

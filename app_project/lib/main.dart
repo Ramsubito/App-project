@@ -18,7 +18,8 @@ class LTG_App extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.red,
         ),
-        home: Container(
+        home: Scaffold(
+            body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -31,7 +32,7 @@ class LTG_App extends StatelessWidget {
             ),
           ),
           child: const MyHomePage(title: 'LTG: Look for the game'),
-        ));
+        )));
   }
 }
 
@@ -73,12 +74,18 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 125,
               margin: const EdgeInsets.only(top: 40),
               decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                //color: Colors.blue,
-                image: DecorationImage(
-                    image: AssetImage('Assets/Asset_LogoLTG.png'),
-                    fit: BoxFit.cover),
-              ),
+                  shape: BoxShape.circle,
+                  //color: Colors.blue,
+                  image: DecorationImage(
+                      image: AssetImage('Assets/Asset_LogoLTG.png'),
+                      fit: BoxFit.cover),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey,
+                        spreadRadius: 1,
+                        blurRadius: 7,
+                        offset: const Offset(0, 3)),
+                  ]),
             ),
           ),
           Center(

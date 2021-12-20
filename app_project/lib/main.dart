@@ -2,6 +2,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:app_project/screens/screen1.dart';
 
 void main() {
   runApp(const LTG_App());
@@ -126,7 +127,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         offset: Offset(0, 6)),
                   ]),
               child: ElevatedButton(
-                  onPressed: OnPressedButon,
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const Screen1(
+                        title: 'eso',
+                      ),
+                    ));
+                  },
                   child: const Text(
                     'Look for prices',
                     style: TextStyle(

@@ -60,6 +60,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
       - Assets/Asset_LogoLTG.png
+      - Assets/callof.png
+      - Assets/destiny1.png
+      - Assets/eldenring1.png
+      - Assets/fortnite1.png
+      - Assets/stormbound1.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -76,7 +81,7 @@ flutter:
   fonts:
     - family: Swiss
       fonts:
-        - asset: fonts/Swis721BTBold.ttf
+        - asset: fonts/Swiss_721_light_extended_bt.ttf
     - family: SwissBold
       fonts:
         - asset: fonts/Swis721BTBold.ttf

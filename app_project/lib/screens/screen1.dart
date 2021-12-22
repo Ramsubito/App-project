@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:app_project/main.dart';
+import 'package:app_project/Info/mockedoffers.dart';
+import 'package:app_project/models/offers.dart';
+//import 'package:app_project/main.dart';
 
 class Screen1 extends StatefulWidget {
   const Screen1({Key? key, required this.title}) : super(key: key);
@@ -11,12 +13,11 @@ class Screen1 extends StatefulWidget {
 }
 
 class _Screen1State extends State<Screen1> {
+  List<Offers> offers = Info.getMockedOffers().cast<Offers>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Prices Sceen'),
-      ),
+      drawer: const Drawer(),
       backgroundColor: Colors.white,
       body: Center(
           child: Column(
@@ -35,7 +36,7 @@ class _Screen1State extends State<Screen1> {
                       color: Colors.grey,
                       spreadRadius: 1,
                       blurRadius: 7,
-                      offset: const Offset(0, 3)),
+                      offset: Offset(0, 3)),
                 ]),
             child: Row(
               children: <Widget>[
@@ -66,154 +67,74 @@ class _Screen1State extends State<Screen1> {
               ],
             ),
           ),
-          Container(
-            height: 80,
-            width: 320,
-            margin: const EdgeInsets.only(top: 25),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.grey,
-                      spreadRadius: 2,
-                      blurRadius: 7,
-                      offset: Offset(0, 6)),
-                ]),
-            child: ElevatedButton(
-                onPressed: OnPressedButon2,
-                child: const Text(
-                  'Game1',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 20,
-                    fontFamily: 'Swiss',
+          Expanded(
+            child: ListView.builder(
+              itemCount: offers.length,
+              itemBuilder: (BuildContext context, int index) {
+                // ignore: avoid_unnecessary_containers
+                return Container(
+                  margin: const EdgeInsets.all(10),
+                  height: 100,
+                  child: Stack(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          foregroundColor: MaterialStateProperty.all<Color>(
+                              const Color.fromARGB(255, 0, 0, 0)),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color.fromARGB(255, 255, 255, 255)),
+                          shadowColor: MaterialStateProperty.all<Color>(
+                              const Color.fromARGB(255, 50, 50, 50)),
+                          overlayColor: MaterialStateProperty.all<Color>(
+                              const Color.fromARGB(50, 50, 50, 50)),
+                          elevation: MaterialStateProperty.all<double>(15),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //const Padding(padding: EdgeInsets.fromLTRB(5, 0, 5, 0)),
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    const Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            10, 20, 10, 20)),
+                                    Text(offers[index].name,
+                                        style: const TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 234, 61, 78))),
+                                    Text(
+                                      offers[index].console,
+                                      style: const TextStyle(fontSize: 15),
+                                    )
+                                  ]),
+                            ),
+                            Expanded(
+                                flex: 1,
+                                child: Text(
+                                  offers[index].price,
+                                  style: const TextStyle(
+                                      color: Color.fromARGB(255, 234, 61, 78)),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 245, 245, 245)),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 245, 245, 245)),
-                  fixedSize:
-                      MaterialStateProperty.all<Size>(const Size(250, 50)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                )),
+                );
+              },
+            ),
           ),
-          Container(
-            height: 80,
-            width: 320,
-            margin: const EdgeInsets.only(top: 25),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.grey,
-                      spreadRadius: 2,
-                      blurRadius: 7,
-                      offset: Offset(0, 6)),
-                ]),
-            child: ElevatedButton(
-                onPressed: OnPressedButon2,
-                child: const Text(
-                  'Game2',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 20,
-                    fontFamily: 'Swiss',
-                  ),
-                ),
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 245, 245, 245)),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 245, 245, 245)),
-                  fixedSize:
-                      MaterialStateProperty.all<Size>(const Size(250, 50)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                )),
-          ),
-          Container(
-            height: 80,
-            width: 320,
-            margin: const EdgeInsets.only(top: 25),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.grey,
-                      spreadRadius: 2,
-                      blurRadius: 7,
-                      offset: Offset(0, 6)),
-                ]),
-            child: ElevatedButton(
-                onPressed: OnPressedButon2,
-                child: const Text(
-                  'Game3',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 20,
-                    fontFamily: 'Swiss',
-                  ),
-                ),
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 245, 245, 245)),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 245, 245, 245)),
-                  fixedSize:
-                      MaterialStateProperty.all<Size>(const Size(250, 50)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                )),
-          ),
-          Container(
-            height: 80,
-            width: 320,
-            margin: const EdgeInsets.only(top: 25),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.grey,
-                      spreadRadius: 2,
-                      blurRadius: 7,
-                      offset: Offset(0, 6)),
-                ]),
-            child: ElevatedButton(
-                onPressed: OnPressedButon2,
-                child: const Text(
-                  'Game4',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 20,
-                    fontFamily: 'Swiss',
-                  ),
-                ),
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 245, 245, 245)),
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      const Color.fromARGB(255, 245, 245, 245)),
-                  fixedSize:
-                      MaterialStateProperty.all<Size>(const Size(250, 50)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                )),
-          )
         ],
       )),
     );

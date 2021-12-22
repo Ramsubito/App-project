@@ -2,6 +2,7 @@
 
 //import 'dart:ui';
 import 'package:app_project/screens/screen2.dart';
+import 'package:app_project/screens/screen3.dart';
 import 'package:flutter/material.dart';
 import 'package:app_project/screens/screen1.dart';
 
@@ -217,7 +218,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             offset: Offset(0, 6)),
                       ]),
                   child: ElevatedButton(
-                      onPressed: OnPressedButon,
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const Screen3(
+                            title: 'eso',
+                          ),
+                        ));
+                      },
                       child: const Text(
                         'Your Wishlist',
                         style: TextStyle(

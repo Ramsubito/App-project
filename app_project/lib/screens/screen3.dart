@@ -18,7 +18,7 @@ class _Screen3State extends State<Screen3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
+      body: StreamBuilder<QuerySnapshot>(
           stream: Firestore.instance.collection('Offers').snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
@@ -26,7 +26,7 @@ class _Screen3State extends State<Screen3> {
                 child: CircularProgressIndicator(),
               );
             }
-            List<DocumentSnapshot> docs = snapshot.data.documents;
+            List<DocumentSnapshot> docs = snapshot.data!.documents;
             return ListView.builder(
                 itemCount: docs.length,
                 itemBuilder: (context, index) {

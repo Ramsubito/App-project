@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:ltg_app/Info/mockedoffers.dart';
 import 'package:ltg_app/main.dart';
 import 'package:ltg_app/models/offers.dart';
 //import 'package:app_project/main.dart';
@@ -16,7 +15,6 @@ class Screen3 extends StatefulWidget {
 }
 
 class _Screen3State extends State<Screen3> {
-  List<Offers> offers = Info.getMockedOffers().cast<Offers>();
   @override
   Widget build(BuildContext context) {
     // ignore: dead_code

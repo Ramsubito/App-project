@@ -1,6 +1,9 @@
+import 'dart:convert';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
-import 'package:ltg_app/Info/mockedoffers.dart';
 import 'package:ltg_app/models/offers.dart';
+import 'package:http/http.dart' as http;
 //import 'package:app_project/main.dart';
 
 class Screen1 extends StatefulWidget {
@@ -8,13 +11,56 @@ class Screen1 extends StatefulWidget {
 
   final String title;
 
+  get state => null;
+  //final int state;
   @override
   State<Screen1> createState() => _Screen1State();
 }
 
 class _Screen1State extends State<Screen1> {
-  List<Offers> offers = Info.getMockedOffers().cast<Offers>();
-  TextEditingController? _textEditingController = TextEditingController();
+  late TextEditingController _controller;
+  List<Offers> _movies = [];
+
+  final Offers item = Offers("Destiny", "Switch", 50);
+  @override
+  void initState() {
+    _controller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _returnResult(String text) {
+    Navigator.of(context).pop(item);
+  }
+
+  void _offersListSearch(String gameName) async {
+    setState(() {
+      _movies.clear();
+    });
+    String myurl =
+        "https://video-game-price.p.rapidapi.com/game/?full_name=$gameName&rapidapi-key=25edc57e30msh6062089ee09d89ep11c435jsn214395533310";
+    var res = await http.get(Uri.parse(myurl));
+    var decodedjson = jsonDecode(res.body);
+    if (decodedjson["Results"].toString() == "False") {
+      return;
+    }
+    int total = int.parse(decodedjson["results"]);
+    if (total > 10) {
+      total = 10;
+    }
+    for (int i = 0; i < total; i++) {
+      Offers _movieModel = Offers.fromJson(decodedjson, i);
+      setState(() {
+        _movies.add(_movieModel);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,17 +70,6 @@ class _Screen1State extends State<Screen1> {
           child: Column(
         //mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Container(
-            child: TextField(
-              controller: _textEditingController,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                errorBorder: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-              ),
-            ),
-          ),
           Container(
             height: 175,
             width: 400,
@@ -50,10 +85,24 @@ class _Screen1State extends State<Screen1> {
                       blurRadius: 7,
                       offset: Offset(0, 3)),
                 ]),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: TextField(
+                  decoration: const InputDecoration(),
+                  style: const TextStyle(color: Colors.grey),
+                  controller: _controller,
+                  onSubmitted: (gameName) {
+                    if (gameName.isNotEmpty) {
+                      if (widget.state != -1) {
+                        _offersListSearch(gameName);
+                      }
+                    }
+                  }),
+            ),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: offers.length,
+              itemCount: _movies.length,
               itemBuilder: (BuildContext context, int index) {
                 // ignore: avoid_unnecessary_containers
                 return Container(
@@ -93,12 +142,12 @@ class _Screen1State extends State<Screen1> {
                                     const Padding(
                                         padding: EdgeInsets.fromLTRB(
                                             10, 20, 10, 20)),
-                                    Text(offers[index].name,
+                                    Text(_movies[index].getName,
                                         style: const TextStyle(
                                             color: Color.fromARGB(
                                                 255, 234, 61, 78))),
                                     Text(
-                                      offers[index].console,
+                                      _movies[index].getConsole,
                                       style: const TextStyle(fontSize: 15),
                                     )
                                   ]),
@@ -106,7 +155,7 @@ class _Screen1State extends State<Screen1> {
                             Expanded(
                                 flex: 1,
                                 child: Text(
-                                  offers[index].price,
+                                  _movies[index].getPrice.toString(),
                                   style: const TextStyle(
                                       color: Color.fromARGB(255, 234, 61, 78)),
                                 )),

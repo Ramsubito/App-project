@@ -17,12 +17,11 @@ class Screen3 extends StatefulWidget {
 
 class _Screen3State extends State<Screen3> {
   late TextEditingController controller;
-
-  List<Wish> wishes = [
-    Wish("Fifa 22"),
-    Wish("God of War"),
-    Wish("The Binding of Isaac", true),
-  ];
+  // ignore: non_constant_identifier_names
+  CollectionReference Wishes = FirebaseFirestore.instance.collection('Wishes');
+  final Stream<QuerySnapshot> users =
+      FirebaseFirestore.instance.collection('Wishes').snapshots();
+  List<Wish> wishes = [];
 
   @override
   void initState() {
@@ -160,6 +159,10 @@ class _Screen3State extends State<Screen3> {
                       setState(() {
                         if (text.isNotEmpty) {
                           wishes.add(Wish(text));
+                          Wishes.add({'Game': text, 'Done': false})
+                              .then((value) => print('Wish Added'))
+                              .catchError((error) =>
+                                  print('Failed to add wish: $error'));
                           controller.clear();
                         }
                       });

@@ -21,7 +21,7 @@ class _Screen1State extends State<Screen1> {
   late TextEditingController _controller;
   List<Offers> _movies = [];
 
-  final Offers item = Offers("Destiny", "Switch", 50);
+  final Offers item = Offers("Destiny", "Switch", "50");
   @override
   void initState() {
     _controller = TextEditingController();
@@ -43,13 +43,13 @@ class _Screen1State extends State<Screen1> {
       _movies.clear();
     });
     String myurl =
-        "https://video-game-price.p.rapidapi.com/game/?full_name=$gameName&rapidapi-key=25edc57e30msh6062089ee09d89ep11c435jsn214395533310";
+        "https://video-game-price.p.rapidapi.com/game/?name_contains=$gameName&rapidapi-key=25edc57e30msh6062089ee09d89ep11c435jsn214395533310";
     var res = await http.get(Uri.parse(myurl));
     var decodedjson = jsonDecode(res.body);
     if (decodedjson["Results"].toString() == "False") {
       return;
     }
-    int total = int.parse(decodedjson["results"]);
+    int total = decodedjson["count"];
     if (total > 10) {
       total = 10;
     }
@@ -155,7 +155,7 @@ class _Screen1State extends State<Screen1> {
                             Expanded(
                                 flex: 1,
                                 child: Text(
-                                  _movies[index].getPrice.toString(),
+                                  _movies[index].getPrice,
                                   style: const TextStyle(
                                       color: Color.fromARGB(255, 234, 61, 78)),
                                 )),

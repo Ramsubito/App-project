@@ -8,4 +8,6 @@ class Offers {
     required this.console,
     required this.price,
   });
+
+  static where(bool Function(dynamic offers) param0) {}
 }

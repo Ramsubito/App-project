@@ -14,6 +14,7 @@ class Screen1 extends StatefulWidget {
 
 class _Screen1State extends State<Screen1> {
   List<Offers> offers = Info.getMockedOffers().cast<Offers>();
+  TextEditingController? _textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +24,17 @@ class _Screen1State extends State<Screen1> {
           child: Column(
         //mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Container(
+            child: TextField(
+              controller: _textEditingController,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                errorBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+              ),
+            ),
+          ),
           Container(
             height: 175,
             width: 400,
@@ -38,34 +50,6 @@ class _Screen1State extends State<Screen1> {
                       blurRadius: 7,
                       offset: Offset(0, 3)),
                 ]),
-            child: Row(
-              children: <Widget>[
-                Container(
-                  width: 300,
-                  height: 50,
-                  margin: const EdgeInsets.only(left: 35, top: 65),
-                  child: Row(
-                    children: const [
-                      Text(
-                        'Search...',
-                        style: TextStyle(fontSize: 24, color: Colors.grey),
-                      ),
-                      Padding(padding: EdgeInsets.only(left: 150)),
-                      Icon(
-                        Icons.search,
-                        size: 42,
-                      )
-                    ],
-                  ),
-                  padding: const EdgeInsets.only(top: 3, left: 6),
-                  decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(20), //Search your trip add icon
-                    color: Colors.grey.shade200,
-                  ),
-                ),
-              ],
-            ),
           ),
           Expanded(
             child: ListView.builder(

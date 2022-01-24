@@ -108,7 +108,7 @@ class _Screen3State extends State<Screen3> {
                   Padding(padding: EdgeInsets.only(top: 20)),
                   Text(
                     'Your Wishlist',
-                    style: TextStyle(fontSize: 35, fontFamily: 'Swiss'),
+                    style: TextStyle(fontSize: 35, fontFamily: 'Prototype'),
                   )
                 ],
               ),

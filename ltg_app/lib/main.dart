@@ -25,6 +25,7 @@ class LTG_App extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter App: Roger Perez and Marc Ramos',
         theme: ThemeData(
+          fontFamily: 'Prototype',
           primarySwatch: Colors.red,
         ),
         home: FutureBuilder(
@@ -33,7 +34,7 @@ class LTG_App extends StatelessWidget {
               if (snapshot.hasError) {
                 return Scaffold(
                   appBar: AppBar(
-                    title: Text("ERROR"),
+                    title: const Text("ERROR"),
                   ),
                 );
               }
@@ -79,13 +80,13 @@ class LTG_App extends StatelessWidget {
                                   Text(
                                     'LTG',
                                     style: TextStyle(
-                                        fontSize: 60, fontFamily: 'Swiss'),
+                                        fontSize: 60, fontFamily: 'Prototype'),
                                     //fontWeight: FontWeight.w400),
                                   ),
                                   Text(
                                     'LOOK FOR THE GAME',
                                     style: TextStyle(
-                                        fontSize: 20, fontFamily: 'Swiss'),
+                                        fontSize: 30, fontFamily: 'Prototype'),
                                   )
                                 ],
                               ),
@@ -138,7 +139,6 @@ class LTG_App extends StatelessWidget {
                                     style: TextStyle(
                                       color: Color.fromARGB(255, 0, 0, 0),
                                       fontSize: 20,
-                                      fontFamily: 'Swiss',
                                     ),
                                   ),
                                   style: ButtonStyle(
@@ -185,7 +185,6 @@ class LTG_App extends StatelessWidget {
                                     style: TextStyle(
                                       color: Color.fromARGB(255, 0, 0, 0),
                                       fontSize: 20,
-                                      fontFamily: 'Swiss',
                                     ),
                                   ),
                                   style: ButtonStyle(

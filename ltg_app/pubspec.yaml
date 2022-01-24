@@ -89,6 +89,12 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   #         weight: 700
-  #
+  fonts:
+    - family: Swiss
+      fonts:
+        - asset: fonts/Swis721BTBold.ttf
+    - family: Prototype
+      fonts:
+        - asset: fonts\Prototype.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

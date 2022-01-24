@@ -23,18 +23,43 @@ class _Screen2State extends State<Screen2> {
       drawer: const Drawer(),
       body: Center(
         child: Container(
-            color: const Color.fromARGB(255, 234, 61, 78),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 255, 255, 255),
+                  Color.fromARGB(255, 234, 61, 78),
+                  Color.fromARGB(255, 234, 61, 78),
+                ],
+              ),
+            ),
+            //color: const Color.fromARGB(255, 234, 61, 78),
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(top: 50),
+                    width: 100,
+                    height: 30,
+                    margin: const EdgeInsets.only(top: 50, bottom: 20),
                     child: const Text(
                       'WHAT TO PLAY',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontFamily: 'Swiss', fontSize: 30),
+                      style: TextStyle(fontSize: 30),
                     ),
+                    decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(30),
+                            bottomRight: Radius.circular(30)),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Color.fromARGB(20, 0, 0, 0),
+                              spreadRadius: 1,
+                              blurRadius: 7,
+                              offset: Offset(0, 3)),
+                        ]),
                   ),
                   Expanded(
                     child: ListView.builder(

@@ -75,11 +75,6 @@ class LTG_App extends StatelessWidget {
                               child: Column(
                                 children: const <Widget>[
                                   Padding(padding: EdgeInsets.only(top: 40)),
-                                  Icon(
-                                    Icons.settings,
-                                    color: Colors.black,
-                                    size: 50,
-                                  ),
                                   Padding(padding: EdgeInsets.only(top: 20)),
                                   Text(
                                     'LTG',

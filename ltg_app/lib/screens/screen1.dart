@@ -73,6 +73,32 @@ class _Screen1State extends State<Screen1> {
           Container(
             height: 175,
             width: 400,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 70, 20, 20),
+              child: TextField(
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: 'Search your next game...',
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(25.7),
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: const BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(25.7),
+                    ),
+                  ),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
+                  controller: _controller,
+                  onSubmitted: (gameName) {
+                    if (gameName.isNotEmpty) {
+                      if (widget.state != -1) {
+                        _offersListSearch(gameName);
+                      }
+                    } else {}
+                  }),
+            ),
             decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 234, 61, 78),
                 borderRadius: BorderRadius.only(
@@ -85,20 +111,6 @@ class _Screen1State extends State<Screen1> {
                       blurRadius: 7,
                       offset: Offset(0, 3)),
                 ]),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-              child: TextField(
-                  decoration: const InputDecoration(),
-                  style: const TextStyle(color: Colors.grey),
-                  controller: _controller,
-                  onSubmitted: (gameName) {
-                    if (gameName.isNotEmpty) {
-                      if (widget.state != -1) {
-                        _offersListSearch(gameName);
-                      }
-                    }
-                  }),
-            ),
           ),
           Expanded(
             child: ListView.builder(

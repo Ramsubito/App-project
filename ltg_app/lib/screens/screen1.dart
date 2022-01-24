@@ -165,24 +165,33 @@ class _Screen1State extends State<Screen1> {
                                       children: [
                                         const Padding(
                                             padding: EdgeInsets.fromLTRB(
-                                                10, 20, 10, 20)),
+                                                25, 17, 10, 0)),
                                         Text(_movies[index].getName,
                                             style: const TextStyle(
+                                                fontSize: 20,
                                                 color: Color.fromARGB(
                                                     255, 234, 61, 78))),
                                         Text(
                                           _movies[index].getConsole,
-                                          style: const TextStyle(fontSize: 15),
+                                          style: const TextStyle(fontSize: 12),
                                         )
                                       ]),
                                 ),
                                 Expanded(
                                     flex: 1,
-                                    child: Text(
-                                      _movies[index].getPrice,
-                                      style: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 234, 61, 78)),
+                                    child: Column(
+                                      children: [
+                                        const Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                20, 30, 0, 0)),
+                                        Text(
+                                          _movies[index].getPrice + "€",
+                                          style: const TextStyle(
+                                              fontSize: 23,
+                                              color: Color.fromARGB(
+                                                  255, 234, 61, 78)),
+                                        )
+                                      ],
                                     )),
                               ],
                             ),

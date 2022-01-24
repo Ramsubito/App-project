@@ -21,6 +21,10 @@ class Offers {
   Offers.fromJson(Map<String, dynamic> json, int iteration) {
     _full_name = json["results"][iteration]['full_name'];
     _console_name = json["results"][iteration]['console_name'];
-    _price_nib = json["results"][iteration]['price_nib'];
+    if (json["results"][iteration]['price_nib'] == null) {
+      _price_nib = 'Not Available';
+    } else {
+      _price_nib = json["results"][iteration]['price_nib'];
+    }
   }
 }

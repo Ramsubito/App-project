@@ -1,10 +1,12 @@
+//import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore: unused_import
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ltg_app/main.dart';
 import 'package:ltg_app/models/offers.dart';
-import 'package:ltg_app/models/wishlist.dart';
-//import 'package:app_project/main.dart';
+import 'package:http/http.dart' as http;
 
 class Screen3 extends StatefulWidget {
   const Screen3({Key? key, required this.title}) : super(key: key);
@@ -17,11 +19,12 @@ class Screen3 extends StatefulWidget {
 
 class _Screen3State extends State<Screen3> {
   late TextEditingController controller;
-  // ignore: non_constant_identifier_names
-  CollectionReference Wishes = FirebaseFirestore.instance.collection('Wishes');
-  final Stream<QuerySnapshot> users =
-      FirebaseFirestore.instance.collection('Wishes').snapshots();
-  List<Wish> wishes = [];
+  var gameName = '';
+  var itsDone = false;
+  final Stream<QuerySnapshot> wishes =
+      FirebaseFirestore.instance.collection('wishes').snapshots();
+
+  //List<Wish> wishes = [];
 
   @override
   void initState() {
@@ -41,9 +44,9 @@ class _Screen3State extends State<Screen3> {
       builder: (context) {
         return AlertDialog(
           title: const Text("Confirm Delete"),
-          content: Text(
+          content: const Text(
             "Are you sure you want to "
-            "delete '${wishes[index].what}'??",
+            "delete this?",
           ),
           actions: [
             TextButton(
@@ -60,7 +63,7 @@ class _Screen3State extends State<Screen3> {
     ).then((result) {
       if (result != null && result) {
         setState(() {
-          wishes.removeAt(index);
+          //wishes.removeAt(index);
         });
       }
     });
@@ -68,6 +71,8 @@ class _Screen3State extends State<Screen3> {
 
   @override
   Widget build(BuildContext context) {
+    CollectionReference wishes =
+        FirebaseFirestore.instance.collection('wishes');
     return Scaffold(
         body: Container(
       decoration: const BoxDecoration(
@@ -99,7 +104,7 @@ class _Screen3State extends State<Screen3> {
                         color: Colors.grey,
                         spreadRadius: 1,
                         blurRadius: 7,
-                        offset: const Offset(0, 3)),
+                        offset: Offset(0, 3)),
                   ]),
               child: Column(
                 children: const <Widget>[
@@ -113,74 +118,74 @@ class _Screen3State extends State<Screen3> {
               ),
             ),
           ),
+          // ignore: avoid_unnecessary_containers, sized_box_for_whitespace
           Expanded(
-            child: ListView.builder(
-              itemCount: wishes.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  onTap: () {
-                    setState(() {
-                      wishes[index].toggleDone();
-                    });
-                  },
-                  onLongPress: () {
-                    confirmDelete(index);
-                  },
-                  leading: Checkbox(
-                    value: wishes[index].done,
-                    onChanged: (newValue) {
-                      setState(() {
-                        wishes[index].toggleDone();
+            child: Container(
+              width: 100,
+              height: 50,
+              child: StreamBuilder<QuerySnapshot>(
+                stream: wishes.snapshots(),
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot,
+                ) {
+                  if (snapshot.hasError) {
+                    return const Text('Something went wrong');
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Text('loading');
+                  }
+                  final data = snapshot.requireData;
+                  return ListView.builder(
+                      itemCount: data.size,
+                      itemBuilder: (context, index) {
+                        return Text(data.docs[index]['Game']);
                       });
-                    },
-                  ),
-                  title: Text(
-                    wishes[index].what,
-                    style: TextStyle(
-                      decoration: (wishes[index].done
-                          ? TextDecoration.lineThrough
-                          : TextDecoration.none),
-                    ),
-                  ),
-                );
-              },
+                },
+              ),
             ),
           ),
-          Container(
-            height: 80,
-            color: Colors.blue[100],
-            padding: EdgeInsets.all(16),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: controller,
-                    onSubmitted: (text) {
-                      setState(() {
-                        if (text.isNotEmpty) {
-                          wishes.add(Wish(text));
-                          Wishes.add({'Game': text, 'Done': false})
-                              .then((value) => print('Wish Added'))
-                              .catchError((error) =>
-                                  print('Failed to add wish: $error'));
-                          controller.clear();
-                        }
-                      });
-                    },
-                  ),
+
+          Expanded(
+            child: Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: Container(
+                height: 80,
+                color: Colors.blue[100],
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: controller,
+                        onSubmitted: (text) {
+                          setState(() {
+                            if (text.isNotEmpty) {
+                              wishes
+                                  .add({'Game': text, 'Done': false})
+                                  .then((value) => print('Wish Added'))
+                                  .catchError((error) =>
+                                      print('Failed to add wish: $error'));
+                              controller.clear();
+                            }
+                          });
+                        },
+                      ),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.add),
+                      onPressed: () {
+                        setState(() {
+                          if (controller.text.isNotEmpty) {
+                            //wishes.add(Wish(controller.text));
+                            controller.clear();
+                          }
+                        });
+                      },
+                    ),
+                  ],
                 ),
-                IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {
-                    setState(() {
-                      if (controller.text.isNotEmpty) {
-                        wishes.add(Wish(controller.text));
-                        controller.clear();
-                      }
-                    });
-                  },
-                ),
-              ],
+              ),
             ),
           ),
         ],

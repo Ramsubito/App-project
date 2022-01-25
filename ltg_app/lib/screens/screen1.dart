@@ -19,7 +19,7 @@ class Screen1 extends StatefulWidget {
 
 class _Screen1State extends State<Screen1> {
   late TextEditingController _controller;
-  List<Offers> _movies = [];
+  List<Offers> _games = [];
 
   final Offers item = Offers("Destiny", "Switch", "50");
   @override
@@ -40,7 +40,7 @@ class _Screen1State extends State<Screen1> {
 
   void _offersListSearch(String gameName) async {
     setState(() {
-      _movies.clear();
+      _games.clear();
     });
     String myurl =
         "https://video-game-price.p.rapidapi.com/game/?name_contains=$gameName&rapidapi-key=25edc57e30msh6062089ee09d89ep11c435jsn214395533310";
@@ -54,9 +54,9 @@ class _Screen1State extends State<Screen1> {
       total = 10;
     }
     for (int i = 0; i < total; i++) {
-      Offers _movieModel = Offers.fromJson(decodedjson, i);
+      Offers _gameModel = Offers.fromJson(decodedjson, i);
       setState(() {
-        _movies.add(_movieModel);
+        _games.add(_gameModel);
       });
     }
   }
@@ -126,7 +126,7 @@ class _Screen1State extends State<Screen1> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: _movies.length,
+                  itemCount: _games.length,
                   itemBuilder: (BuildContext context, int index) {
                     // ignore: avoid_unnecessary_containers
                     return Container(
@@ -166,13 +166,13 @@ class _Screen1State extends State<Screen1> {
                                         const Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 25, 17, 10, 0)),
-                                        Text(_movies[index].getName,
+                                        Text(_games[index].getName,
                                             style: const TextStyle(
                                                 fontSize: 20,
                                                 color: Color.fromARGB(
                                                     255, 234, 61, 78))),
                                         Text(
-                                          _movies[index].getConsole,
+                                          _games[index].getConsole,
                                           style: const TextStyle(fontSize: 12),
                                         )
                                       ]),
@@ -185,7 +185,7 @@ class _Screen1State extends State<Screen1> {
                                             padding: EdgeInsets.fromLTRB(
                                                 20, 30, 0, 0)),
                                         Text(
-                                          _movies[index].getPrice + "€",
+                                          _games[index].getPrice + "€",
                                           style: const TextStyle(
                                               fontSize: 23,
                                               color: Color.fromARGB(
